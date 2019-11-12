@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<group>
+	<near_threshold>200</near_threshold>
+	<far_threshold>48</far_threshold>
+	<min_blob_area>4600</min_blob_area>
+	<max_blob_area>307200</max_blob_area>
+	<max_blob_num>20</max_blob_num>
+	<blob_holes>0</blob_holes>
+	<roi_rect_x>16</roi_rect_x>
+	<roi_rect_y>38</roi_rect_y>
+	<roi_rect_w>563</roi_rect_w>
+	<roi_rect_h>268</roi_rect_h>
+	<mesh_nw_x>1424</mesh_nw_x>
+	<mesh_nw_y>60</mesh_nw_y>
+	<mesh_ne_x>3100</mesh_ne_x>
+	<mesh_ne_y>60</mesh_ne_y>
+	<mesh_se_x>3200</mesh_se_x>
+	<mesh_se_y>1140</mesh_se_y>
+	<mesh_sw_x>1280</mesh_sw_x>
+	<mesh_sw_y>1140</mesh_sw_y>
+	<smoothing_size>60</smoothing_size>
+	<smoothing_shape>0</smoothing_shape>
+	<silhouette_scale>1.2</silhouette_scale>
+	<outline_thickness>4</outline_thickness>
+	<target_x>100</target_x>
+	<target_y>100</target_y>
+	<textureFboLeft>1280</textureFboLeft>
+	<textureFboTop>150</textureFboTop>
+</group>
