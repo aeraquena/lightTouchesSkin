@@ -14,7 +14,7 @@ void ofApp::setup() {
     // 2 = Single screen desktop
     // 3 = Church floor, single projection (presentation mode)
     // 4 = Church floor, dual screen and projection
-    roomMode = 2;
+    roomMode = 4;
     
     // Mode for video on first screen
     

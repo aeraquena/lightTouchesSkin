@@ -53,8 +53,8 @@ public:
     int PROJECTION_HEIGHT;
     
     // Laptop screen
-    int SCREEN_WIDTH = 1280;
-    int SCREEN_HEIGHT = 800;
+    int SCREEN_WIDTH = 1440;
+    int SCREEN_HEIGHT = 900;
     
     // Scale value of projection resolution to Kinect resolution
     int scaleVal;
