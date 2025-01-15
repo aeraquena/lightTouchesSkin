@@ -163,6 +163,8 @@ void ofApp::setup() {
         gui.add(shapeFboLeft.setup("shape fbo left", -45, -200, 200));
     }
     
+    gui.add(scaleVal.setup("shape scale val", 2.0, 1.0, 3.0));
+    
     // Target triangle line width
     gui.add(lineWidth.setup("line width", 4, 1, 15));
 
