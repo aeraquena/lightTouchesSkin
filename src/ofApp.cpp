@@ -55,6 +55,7 @@ void ofApp::setup() {
     
     // Set Kinect depth detection thresholds
     if (roomMode == 0) {
+        // DO NOT MODIFY
         // Desktop
         // 4 feet away
         
@@ -69,6 +70,7 @@ void ofApp::setup() {
         gui.add(onePersonBlobArea.setup("1p blob area", 18000, 8000, 35000));
         
     } else if (roomMode == 1) {
+        // DO NOT MODIFY
         // Bedroom wall
         // 8 feet away
         
@@ -83,6 +85,7 @@ void ofApp::setup() {
         gui.add(onePersonBlobArea.setup("1p blob area", 75000, 8000, 75000));
         
     } else if (roomMode == 2) {
+        // DO NOT MODIFY
         // Desktop
         // 4 feet away
         
@@ -98,6 +101,7 @@ void ofApp::setup() {
         
         scaleVal = 1;
     } else if (roomMode == 3 || roomMode == 4) {
+        // MODIFY THIS
         // Church floor
         // 10.5 feet away
         
@@ -116,12 +120,14 @@ void ofApp::setup() {
     
     // Set blob parameters
     if (roomMode == 2) {
+        // DO NOT MODIFY
         // Minimum blob area
         gui.add(minBlobArea.setup("min blob area", 22000, 1000, 30000));
         
         gui.add(minFarThreshold.setup("min far threshold", 66, 0, 70));
         gui.add(maxFarThreshold.setup("max far threshold", 67, 0, 70));
     } else {
+        // MODIFY THIS
         // Minimum blob area
         gui.add(minBlobArea.setup("min blob area", 6000, 1000, 30000));
         
@@ -131,7 +137,7 @@ void ofApp::setup() {
     }
     
     // Blob values
-    gui.add(maxBlobArea.setup("max blob area", (roiW * roiH) - 4000, 0, roiW * roiH));
+    gui.add(maxBlobArea.setup("max blob area", (roiW * roiH) - 4000, 0, roiW * roiH)); // TODO: Change to 2000?
     gui.add(maxBlobNum.setup("max blob num", 6, 1, 50));
     
     // Smoothing values for blobs
@@ -144,12 +150,14 @@ void ofApp::setup() {
     // To align silhouettes with bodies
     
     if (roomMode == 2) {
+        // DO NOT MODIFY THIS
         gui.add(fboLeft.setup("fbo left", 248, -100, 300));
         gui.add(fboTop.setup("fbo top", 40, -200, 400));
         gui.add(shapeFboTop.setup("shape fbo top", 0, -332, 0));
         gui.add(shapeFboLeft.setup("shape fbo left", -45, -200, 200));
     } else {
-        gui.add(fboLeft.setup("fbo left", 146, -100, 200));
+        // MODIFY THIS
+        gui.add(fboLeft.setup("fbo left", 146, -3000, 200));
         gui.add(fboTop.setup("fbo top", 7, -200, 300));
         gui.add(shapeFboTop.setup("shape fbo top", -300, -400, 0));
         gui.add(shapeFboLeft.setup("shape fbo left", -45, -200, 200));
@@ -686,7 +694,7 @@ void ofApp::draw() {
     }
 
     // Draw ROI on 1st screen
-    if (roomMode != 3) {
+    if (roomMode != 3 && videoMode != 0) {
         ofPushStyle();
         ofNoFill();
         ofSetColor(0,255,0);
@@ -746,7 +754,7 @@ void ofApp::draw() {
      * MARK: Draw debug text *
      *************************/
     
-    if (roomMode != 3) {
+    if (roomMode != 3 && !bHide) {
         ofPushStyle();
         
         stringstream reportStream;
@@ -762,8 +770,6 @@ void ofApp::draw() {
         ofDrawBitmapString(reportStream.str(), 220, 550);
         
         ofPopStyle();
-    } else {
-        ofHideCursor();
     }
     
     // Draw GUI
