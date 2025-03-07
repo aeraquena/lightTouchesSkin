@@ -53,8 +53,8 @@ public:
     int PROJECTION_HEIGHT;
     
     // Laptop screen
-    int SCREEN_WIDTH = 1440;
-    int SCREEN_HEIGHT = 900;
+    int SCREEN_WIDTH = 1496;
+    int SCREEN_HEIGHT = 967;
     
     /****************
      * MARK: Kinect *
@@ -172,7 +172,7 @@ public:
     int minTriangleUnit = 1 * INCH_PIXELS;
     
     // Brightness of touched triangle
-    const float TOUCHING_TRIANGLE_BRIGHTNESS = 168;
+    const float TOUCHING_TRIANGLE_BRIGHTNESS = 190; //168
     
     // Are all targets being touched?
     bool allTargetsTouching;

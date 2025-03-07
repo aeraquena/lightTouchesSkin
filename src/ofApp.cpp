@@ -59,12 +59,12 @@ void ofApp::setup() {
         // Desktop
         // 4 feet away
         
-        gui.add(nearThreshold.setup("near threshold", 177, 0, 255));
+        gui.add(nearThreshold.setup("near threshold", 85, 0, 255));
         
-        gui.add(roiX.setup("roi x", 71, 0, 640));
-        gui.add(roiY.setup("roi y", 35, 0, 480));
-        gui.add(roiW.setup("roi w", 539, 0, 640));
-        gui.add(roiH.setup("roi h", 444, 0, 480));
+        gui.add(roiX.setup("roi x", 25, 0, 640));
+        gui.add(roiY.setup("roi y", 52, 0, 480));
+        gui.add(roiW.setup("roi w", 582, 0, 640));
+        gui.add(roiH.setup("roi h", 420, 0, 480));
         
         // Blob area considered to be boundary between one and two people
         gui.add(onePersonBlobArea.setup("1p blob area", 18000, 8000, 35000));
@@ -105,46 +105,48 @@ void ofApp::setup() {
         // Church floor
         // 10.5 feet away
         
-        gui.add(nearThreshold.setup("near threshold", 155, 0, 255));
+        gui.add(nearThreshold.setup("near threshold", 80, 0, 255));
         
-        gui.add(roiX.setup("roi x", 32, 20, 80));
-        gui.add(roiY.setup("roi y", 42, 0, 200));
-        gui.add(roiW.setup("roi w", 556, 500, 600));
-        gui.add(roiH.setup("roi h", 438, 320, 640));
+        gui.add(roiX.setup("roi x", 0, 0, 80));
+        gui.add(roiY.setup("roi y", 0, 0, 200));
+        gui.add(roiW.setup("roi w", 640, 500, 640));
+        gui.add(roiH.setup("roi h", 480, 320, 480));
         
         scaleVal = 3;
     
         // Blob area considered to be boundary between one and two people
-        gui.add(onePersonBlobArea.setup("1p blob area", 26000, 8000, 35000));
+        gui.add(onePersonBlobArea.setup("1p blob area", 200000, 8000, 300000));
     }
     
     // Set blob parameters
     if (roomMode == 2) {
         // DO NOT MODIFY
         // Minimum blob area
-        gui.add(minBlobArea.setup("min blob area", 22000, 1000, 30000));
+        gui.add(minBlobArea.setup("min blob area", 22000, 1000, 50000));
         
         gui.add(minFarThreshold.setup("min far threshold", 66, 0, 70));
         gui.add(maxFarThreshold.setup("max far threshold", 67, 0, 70));
     } else {
         // MODIFY THIS
         // Minimum blob area
-        gui.add(minBlobArea.setup("min blob area", 6000, 1000, 30000));
+        gui.add(minBlobArea.setup("min blob area", 1200, 0, 30000));
+        // to account for people making holes with their hands
         
         // Depth thresholds
         gui.add(minFarThreshold.setup("min far threshold", 0, 0, 70));
-        gui.add(maxFarThreshold.setup("max far threshold", 61, 0, 70));
+        gui.add(maxFarThreshold.setup("max far threshold", 0, 0, 70));
     }
     
     // Blob values
-    gui.add(maxBlobArea.setup("max blob area", (roiW * roiH) - 4000, 0, roiW * roiH)); // TODO: Change to 2000?
+    gui.add(maxBlobArea.setup("max blob area", roiW * roiH - 10000, 0, roiW * roiH)); // TODO: Change to 2000? //(roiW * roiH) - 4000
+    // changed to 200000 to avoid the whole thing recognized as blob
     gui.add(maxBlobNum.setup("max blob num", 6, 1, 50));
     
     // Smoothing values for blobs
     gui.add(smoothingSize.setup("smoothing size", 11, 0, 100));
     gui.add(smoothingShape.setup("smoothing shape", 0, 0, 1));
     gui.add(blurValue.setup("blur value", 31, 0, 100)); // must be odd
-    gui.add(blurThreshold.setup("blur threshold", 20, 0, 255));
+    gui.add(blurThreshold.setup("blur threshold", 105, 0, 255));
 
     // Position of shape and target FBOs
     // To align silhouettes with bodies
@@ -157,10 +159,10 @@ void ofApp::setup() {
         gui.add(shapeFboLeft.setup("shape fbo left", -45, -200, 200));
     } else {
         // MODIFY THIS
-        gui.add(fboLeft.setup("fbo left", 146, -3000, 200));
-        gui.add(fboTop.setup("fbo top", 7, -200, 300));
-        gui.add(shapeFboTop.setup("shape fbo top", -300, -400, 0));
-        gui.add(shapeFboLeft.setup("shape fbo left", -45, -200, 200));
+        gui.add(fboLeft.setup("fbo left", 276, -3000, 600));
+        gui.add(fboTop.setup("fbo top", 130, -200, 300));
+        gui.add(shapeFboTop.setup("shape fbo top", 212, -400, 500));
+        gui.add(shapeFboLeft.setup("shape fbo left", 678, 500, 800));
     }
     
     gui.add(scaleVal.setup("shape scale val", 2.0, 1.0, 3.0));
@@ -187,7 +189,7 @@ void ofApp::setup() {
     
     if (roomMode == 3 || roomMode == 4) {
         PROJECTION_WIDTH = 1920;
-        PROJECTION_HEIGHT = 1080;
+        PROJECTION_HEIGHT = 1200; // 1080
     } else if (roomMode == 2) {
         PROJECTION_WIDTH = 640;
         PROJECTION_HEIGHT = 480;
@@ -213,8 +215,8 @@ void ofApp::setup() {
      ************************/
     
     // Target dimensions
-    gui.add(maxInchesX.setup("maxInchesX", 128, 1, TOTAL_MAX_INCHES_X));
-    gui.add(maxInchesY.setup("maxInchesY", 80, 1, TOTAL_MAX_INCHES_Y));
+    gui.add(maxInchesX.setup("maxInchesX", 94, 1, TOTAL_MAX_INCHES_X));
+    gui.add(maxInchesY.setup("maxInchesY", 70, 1, TOTAL_MAX_INCHES_Y));
     
     allTargetsTouching = false;
     
@@ -240,17 +242,17 @@ void ofApp::setup() {
     // Font
     ofTrueTypeFont::setGlobalDpi(72);
     
-    franklinBook.load("frabk.ttf", 36);
+    franklinBook.load("frabk.ttf", 47);//36
     franklinBook.setLineHeight(18.0f);
     franklinBook.setLetterSpacing(1.037);
     
     // Text position
     textTop = 40;
     textLeft = 1703;
-    textRotate = 181.62;
-    textRight = 847;
-    textTop2 = 31;
-    textRotate2 = -2.8;
+    textRotate = 180;//181.62;
+    textRight = 238; //687 for right justify
+    textTop2 = 40;
+    textRotate2 = 0;//-2.8;
     
     /**********************
      * MARK: Shape colors *
@@ -334,7 +336,11 @@ void ofApp::update() {
             int row = i / kinect.width;
             int thisFarThreshold = ofMap(row, roiY, roiY+roiH, minFarThreshold, maxFarThreshold, true);
             
-            if(pix[i] < nearThreshold && pix[i] > thisFarThreshold) {
+            // if pix is black, ignore - make it 255?
+            // far threshold should be smaller than near threshold
+            if(pix[i] == 00) {
+                pix[i] = 255; // if black, make white to ignore visual noise
+            } else if(pix[i] < nearThreshold && pix[i] > thisFarThreshold) {
                 pix[i] = 255;
             } else {
                 pix[i] = 0;
@@ -354,7 +360,7 @@ void ofApp::update() {
         grayImage.setROI(roiX, roiY, roiW, roiH);
         
         // Find contours
-        contourFinder.findContours(grayImage, minBlobArea, maxBlobArea, maxBlobNum, false);
+        contourFinder.findContours(grayImage, minBlobArea, maxBlobArea, maxBlobNum, true); // true = find holes
         
         grayImage.resetROI();
         
@@ -374,16 +380,24 @@ void ofApp::update() {
             blobArea += contourFinder.blobs[i].area;
         }
         
+        if (!twoTargets) {
+            // EXPERIMENTAL two targets only
+            twoTargets = true;
+            updateTargets();
+        }
+        
         // Check every second
+        // Make 2 targets if blobArea is less than 200000 (or roiW * roiH)
         if (ofGetFrameNum() % changeShapeDelay == 0) {
             // If number of players changed, update targets
-            if (!twoTargets && (contourFinder.nBlobs > 1 || blobArea > onePersonBlobArea)) {
+            // EXPERIMENTAL - two targets only
+            /*if (!twoTargets && (contourFinder.nBlobs > 1 || blobArea > onePersonBlobArea)) {
                 twoTargets = true;
                 updateTargets();
             } else if (twoTargets && (contourFinder.nBlobs <= 1 && blobArea <= onePersonBlobArea)) {
                 twoTargets = false;
                 updateTargets();
-            }
+            }*/
             
             if (prevNumBlobs != contourFinder.nBlobs) {
                 // Shuffle colors
@@ -429,6 +443,8 @@ void ofApp::update() {
                     numTrianglesTouching++;
                 }
             }
+        } else {
+            numTrianglesTouching = 0;
         }
     }
     
@@ -508,6 +524,14 @@ void ofApp::draw() {
     ofClear(0,0,0,0);
     ofBackground(0,0,0,0);
     
+    // Rotate 180
+    // https://gist.github.com/KavinHan/fe4005e95a6225f6be751210836a85a2
+    ofPushMatrix();
+    ofTranslate(PROJECTION_WIDTH/2, PROJECTION_HEIGHT/2, 0); //move pivot to centre
+    ofRotateDeg(180, 0, 0, 1); //rotate from centre
+    ofPushMatrix();
+    ofTranslate(-PROJECTION_WIDTH/2,-PROJECTION_HEIGHT/2,0); //move back by the centre offset
+    
     /**************************
      * MARK: Draw silhouettes *
      **************************/
@@ -546,6 +570,9 @@ void ofApp::draw() {
         }
     }
     
+    ofPopMatrix();
+    ofPopMatrix();
+    
     finalFbo.end();
     
     /*************************
@@ -555,6 +582,16 @@ void ofApp::draw() {
     targetFbo.begin();
     ofClear(0,0,0,0);
     ofBackground(0,0,0,0);
+    
+    
+    // EXPERIMENT: Display bounds
+    /*ofPushStyle();
+    ofSetColor(0,255,0);
+    ofNoFill();
+    int maxPixelsX = maxInchesX * INCH_PIXELS;
+    int maxPixelsY = maxInchesY * INCH_PIXELS;
+    ofDrawRectangle(3 * INCH_PIXELS, 3 * INCH_PIXELS, maxPixelsX, maxPixelsY);
+    ofPopStyle();*/
     
     // Draw targets
     
@@ -746,9 +783,9 @@ void ofApp::draw() {
     
     ofRotateDeg(textRotate);
     ofSetColor(255);
-    franklinBook.drawString("LIGHT TOUCHES SKIN", 0, 0);
+    //franklinBook.drawString("LIGHT TOUCHES SKIN", 0, -1 * SCREEN_HEIGHT - 150);
     ofRotateDeg(textRotate2);
-    franklinBook.drawString("move your bodies to touch all the triangles", textRight, textTop2);
+    franklinBook.drawString("MOVE YOUR BODIES TO TOUCH ALL THE TRIANGLES", textRight, -1 * SCREEN_HEIGHT - 150); //textTop2
     
     ofPopMatrix();
     
@@ -770,6 +807,9 @@ void ofApp::draw() {
         reportStream << "Target lerp percent: " << targetLerpPercent << endl;
         
         ofDrawBitmapString(reportStream.str(), 220, 550);
+        
+        // Attempt to draw blob area... can't draw numbers
+        //franklinBook.drawString("Blob Area:", 220, 750);
         
         ofPopStyle();
     }
